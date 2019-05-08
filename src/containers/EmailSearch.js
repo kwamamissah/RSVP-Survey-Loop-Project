@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './EmailSearch.css';
 import firebase from '../firebase.js';
 
+
 class EmailSearch extends Component {
     state = {
         email: "",
@@ -43,17 +44,31 @@ class EmailSearch extends Component {
 
       findUser = e => {
         e.preventDefault();
-        const db = firebase.firestore();
-    
-        const emailRef = db.collection("/emails").where("email", "==",  `${this.state.email}`)
 
+        let text = document.querySelector("#emailHelp")
+        let email = this.state.email
+        const db = firebase.firestore();
+        const emailRef = db.collection("/emails").where("email", "==",  `${email}`)
+        debugger
         emailRef.get().then(function (querySnapshot){
             querySnapshot.forEach(function(doc){
-                console.log(doc.id, '=>', doc.data());
+                if(doc.data().email !== null){
+                    console.log(doc.data().name)
+                    text.style.color = '#228b22'
+                    text.style.fontWeight = 'bold'
+                    text.textContent = "Email found, redirecting to Post-Survey"
+                    // window.location.href = 'http://google.com'
+                } else {
+                    console.log("hey I am on my way up")
+                    text.style.color = 'red'
+                    text.style.fontWeight = 'bold'
+                    text.textContent = "Email not found, redirecting to Pre-Survey"
+                    // window.location.href = 'http://ask.com'
+                }
             })
         })
       }
-
+      
 
 
 
@@ -64,7 +79,7 @@ class EmailSearch extends Component {
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name= "email" onChange={(e) => this.handleChange(e)} />
                     <button type="submit" className="btn btn-outline-primary btn-sm" onClick={(e) => this.findUser(e)}>Submit</button>
                 </div>
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                <small id="emailHelp" className="form-text">We'll never share your email with anyone else.</small>
             </form>
         );
     }
