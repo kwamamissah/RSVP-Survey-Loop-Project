@@ -6,7 +6,7 @@ import firebase from '../firebase.js';
 class EmailSearch extends Component {
     state = {
         email: "",
-        name: "",
+        name: "kwam",
         emailFire: [],
         sendingEmail: false
     }
@@ -32,7 +32,7 @@ class EmailSearch extends Component {
         e.preventDefault();
         const db = firebase.firestore();
         
-        db.collection("/emails").add({
+        db.collection("/emails").doc(`${this.state.email}`).set({
           name: this.state.name,
           email: this.state.email
         });  
@@ -48,11 +48,9 @@ class EmailSearch extends Component {
         let text = document.querySelector("#emailHelp")
         let email = this.state.email
         const db = firebase.firestore();
-        const emailRef = db.collection("/emails").where("email", "==",  `${email}`)
-        debugger
-        emailRef.get().then(function (querySnapshot){
-            querySnapshot.forEach(function(doc){
-                if(doc.data().email !== null){
+        const emailRef = db.collection("/emails").doc(`${email}`)
+            emailRef.get().then(function(doc) {
+                if(doc.data() !== undefined){
                     console.log(doc.data().name)
                     text.style.color = '#228b22'
                     text.style.fontWeight = 'bold'
@@ -63,13 +61,10 @@ class EmailSearch extends Component {
                     text.style.color = 'red'
                     text.style.fontWeight = 'bold'
                     text.textContent = "Email not found, redirecting to Pre-Survey"
-                    // window.location.href = 'http://ask.com'
+                    window.location.href = 'http://ask.com'
                 }
             })
-        })
       }
-      
-
 
 
     render() {
