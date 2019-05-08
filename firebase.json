@@ -1,0 +1,9 @@
+{
+  "database": {
+    "rules": "write"
+  },
+  "firestore": {
+    "rules": "read write",
+    "indexes": "ascending"
+  }
+}

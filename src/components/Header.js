@@ -5,7 +5,7 @@ class Header extends Component {
         return (
             <div>
                 <h1>
-                    Google Header 
+                    Event Survey
                 </h1>
             </div>
         );

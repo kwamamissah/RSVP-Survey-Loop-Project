@@ -1,0 +1,15 @@
+.form-group {
+    margin: auto;
+    padding-top: 20%;
+    display: inline-flex; 
+    
+}
+
+.btn-primary {
+    display: inline;
+}
+
+/* @media screen and (min-width: 400px)  {...}
+@media screen and (min-width: 600px)  {...}
+@media screen and (min-width: 1000px) {...}
+@media screen and (min-width: 1400px) {...} */
