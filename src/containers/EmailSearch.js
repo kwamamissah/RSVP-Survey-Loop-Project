@@ -83,29 +83,32 @@ class EmailSearch extends Component {
       }
 
       accessAnswers = () => {
-        let email = "kwamamissah@me.now"
+        let email = []
+        let user = "kwamamissah@me.now"
         let data = this.state.data.items
+
+        
 
         if( this.state.data.items !== undefined ){
             data.forEach(ans => {
-                console.log(ans.answers)
+               email.push(ans.answers[2].email)
             })
         }
+        return email
       }
 
-      searchEmail = () => {
+      findEmail = () => {
           let answers = this.accessAnswers()
-
+            console.log(answers)
           if( answers !== undefined ){
-            answers.forEach(ans => {
-                console.log(ans)
-            })
+            return answers.includes("kwamamissah@me.now")
         }
-
       }
+
+      //if email can be found replace firebase code so that I can embed the Typeform into the Presurvey tab or just use the link.
 
     render() {
-        console.log(this.searchEmail())
+        console.log(this.findEmail())
         return (
             <form>
                 <div className="form-group col-4">
