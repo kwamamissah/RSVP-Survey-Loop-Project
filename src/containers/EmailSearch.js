@@ -8,6 +8,7 @@ class EmailSearch extends Component {
         email: "",
         name: "kwam",
         emailFire: [],
+        data: [],
         sendingEmail: false
     }
 
@@ -26,6 +27,21 @@ class EmailSearch extends Component {
     }
 
     //Use Firebase for dummy data.
+
+    componentDidMount (){
+        fetch('https://api.typeform.com/forms/c0r13c/responses', {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer 4u7RdLCDTZ6sHaLU8G5tWQiATBwdodPoEWicPYnk32ta' 
+            },
+        })
+            .then(resp => resp.json())
+            .then(json => this.setState({ data: json})) 
+
+    }
+
+    
+    //Typeform rsvp-loop token 4u7RdLCDTZ6sHaLU8G5tWQiATBwdodPoEWicPYnk32ta
 
 
     addUser = e => {
@@ -55,7 +71,7 @@ class EmailSearch extends Component {
                     text.style.color = '#228b22'
                     text.style.fontWeight = 'bold'
                     text.textContent = "Email found, redirecting to Post-Survey"
-                    // window.location.href = 'http://google.com'
+                    window.location.href = 'https://docs.google.com/forms/d/1IjPglFdZ-IlZhmFdzhKdQfWKKxPc9bv5w_CLADUAnUo/viewform?edit_requested=true'
                 } else {
                     console.log("hey I am on my way up")
                     text.style.color = 'red'
@@ -68,6 +84,7 @@ class EmailSearch extends Component {
 
 
     render() {
+        console.log(this.state.data.items)
         return (
             <form>
                 <div className="form-group col-4">
