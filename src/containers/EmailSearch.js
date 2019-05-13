@@ -82,9 +82,30 @@ class EmailSearch extends Component {
             })
       }
 
+      accessAnswers = () => {
+        let email = "kwamamissah@me.now"
+        let data = this.state.data.items
+
+        if( this.state.data.items !== undefined ){
+            data.forEach(ans => {
+                console.log(ans.answers)
+            })
+        }
+      }
+
+      searchEmail = () => {
+          let answers = this.accessAnswers()
+
+          if( answers !== undefined ){
+            answers.forEach(ans => {
+                console.log(ans)
+            })
+        }
+
+      }
 
     render() {
-        console.log(this.state.data.items)
+        console.log(this.searchEmail())
         return (
             <form>
                 <div className="form-group col-4">
